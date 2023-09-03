@@ -39,6 +39,7 @@ public class SearchTest {
     public static final String YM_COUNT = "//*[@id=\"root\"]/div/div/div[3]/div[1]/fieldset/div/label[4]/span[2]/span";
     public static final String SBER_COUNT = "//*[@id=\"root\"]/div/div/div[3]/div[1]/fieldset/div/label[5]/span[2]/span";
     public static final String KAZAN_COUNT = "//*[@id=\"root\"]/div/div/div[3]/div[1]/fieldset/div/label[6]/span[2]/span";
+    private final String CARDS_TEXT_VALUE = "p.css-99ww93:nth-child(5)";
 
 
     /*
@@ -124,7 +125,8 @@ public class SearchTest {
         driver.manage().window().maximize();
         WebElement searchFields = driver.findElement(By.xpath(SEARCH_INPUT));
         searchFields.sendKeys("кофе зерновой" + "\n");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CARDS_TEXT_VALUE)));
 
         WebElement productText = driver.findElement(By.xpath(value));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -133,7 +135,7 @@ public class SearchTest {
                 new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
 
         String marketSearch = productText.getAttribute("textContent");
-        System.out.println(marketSearch);
+        System.out.println(marketSearch + value);
         assertNotEquals("0 шт", marketSearch, "нет в маркете" + value);
     }
 

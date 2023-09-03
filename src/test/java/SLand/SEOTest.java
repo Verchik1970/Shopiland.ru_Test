@@ -6,6 +6,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.apache.commons.lang.time.StopWatch;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -48,9 +49,7 @@ public class SEOTest {
 
         //  Перейти на страницу категории товаров
         driver.findElement(By.xpath("//p[contains(text(),'женские сумки')]")).click();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable
-                (By.cssSelector(fotoProductCard)));
+
         //  Найти первую картинку на странице категории товаров и проверить наличие атрибута alt
         WebElement firstCategoryImage = driver.findElement(By.cssSelector("img"));
         String categoryAltValue = firstCategoryImage.getAttribute("alt");
@@ -136,9 +135,8 @@ public class SEOTest {
 
 
     }
-
-    @AfterEach
-    public void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         driver.quit();
     }
 

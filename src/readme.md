@@ -25,6 +25,9 @@
 mvn clean test
 Запуск Allure отчета:
 mvn allure:serve
+для запуска одного конкретного теста :
+mvn test -Dtest=SearchTest#setAssertMarketplaceTest
+mvn test -Dtest='Название теста'#'Название класса'
 
 
 ### Требования
@@ -43,4 +46,4 @@ selenium.version =4.11
 
 
 ## Тестирование
-Проект можно запускать потестово и поклассово из среды разработки Inteliji Idea 
+Проект можно запускать потестово и поклассово из среды разработки Intellij Idea 
