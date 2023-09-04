@@ -1,6 +1,5 @@
 package SLand;
 
-import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
@@ -24,6 +23,7 @@ public class SortingReitingTest {
     private final String REITING_SORT_BUTTON = "//div[contains(text(),'рейтингу')]";
     private final String BRAND_SORT_BUTTON_FIRST = "a.css-95nm5l:nth-child(1)";
     private final String CARDS_TEXT_VALUE = "p.css-99ww93:nth-child(5)";
+    private final String REITING_COUNT_VALUE ="span.css-1t0tstb";
 
 
 
@@ -40,8 +40,9 @@ public class SortingReitingTest {
             driver.findElement(By.xpath(REITING_SORT_BUTTON)).click();
             // находим все карточки товара на странице
             List<WebElement> productCards = driver.findElements(By.cssSelector
-                    ("div.MuiBox-root.css-bp8b62:nth-child(4) > span.css-1t0tstb"));
+                    (REITING_COUNT_VALUE));
             Allure.addAttachment("Отсортированные товары по рейтингу", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 // получаем первую и последнюю карточки товара
             WebElement firstProductCard = productCards.get(0);
